@@ -30,20 +30,48 @@ struct SettingsView: View {
                     FeatureRow(
                         icon: "pencil.and.sparkles",
                         title: "Writing Tools",
-                        description: "Reframe your thoughts with positive AI assistance"
+                        description: "Reframe your thoughts with positive AI assistance",
+                        isAvailable: AIAvailability.isAvailable
                     )
                     
                     FeatureRow(
                         icon: "chart.bar.doc.horizontal",
                         title: "Smart Summaries",
-                        description: "Generate monthly insights from your entries"
+                        description: "Generate monthly insights from your entries",
+                        isAvailable: AIAvailability.isAvailable
                     )
                     
                     FeatureRow(
                         icon: "face.smiling",
                         title: "Mood Analysis",
-                        description: "On-device sentiment detection for self-awareness"
+                        description: "On-device sentiment detection for self-awareness",
+                        isAvailable: true // Always available
                     )
+                    
+                    FeatureRow(
+                        icon: "brain.head.profile",
+                        title: "Foundation Models",
+                        description: "Advanced cognitive reframing with Apple Intelligence",
+                        isAvailable: AIAvailability.isAvailable
+                    )
+                }
+                
+                Section("System Information") {
+                    HStack {
+                        Text("Apple Intelligence Status")
+                        Spacer()
+                        Text(AIAvailability.statusMessage)
+                            .foregroundColor(AIAvailability.isAvailable ? .green : .orange)
+                            .font(.caption)
+                    }
+                    
+                    HStack {
+                        Text("Device Compatibility")
+                        Spacer()
+                        Text("iOS 26+ Required")
+                            .foregroundColor(.green)
+                            .font(.caption)
+                    }
                 }
                 
                 Section("Legal") {
@@ -90,16 +118,40 @@ struct FeatureRow: View {
     let icon: String
     let title: String
     let description: String
+    let isAvailable: Bool
+    
+    init(icon: String, title: String, description: String, isAvailable: Bool = true) {
+        self.icon = icon
+        self.title = title
+        self.description = description
+        self.isAvailable = isAvailable
+    }
     
     var body: some View {
         HStack(spacing: 12) {
             Image(systemName: icon)
-                .foregroundColor(.blue)
+                .foregroundColor(isAvailable ? .blue : .gray)
                 .frame(width: 24)
             
             VStack(alignment: .leading, spacing: 2) {
-                Text(title)
-                    .font(.body)
+                HStack {
+                    Text(title)
+                        .font(.body)
+                        .foregroundColor(isAvailable ? .primary : .secondary)
+                    
+                    Spacer()
+                    
+                    if !isAvailable {
+                        Text("Not Available")
+                            .font(.caption2)
+                            .foregroundColor(.orange)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 2)
+                            .background(Color.orange.opacity(0.1))
+                            .cornerRadius(4)
+                    }
+                }
+                
                 Text(description)
                     .font(.caption)
                     .foregroundColor(.secondary)

@@ -55,7 +55,7 @@ struct MonthlySummaryView: View {
                     VStack(spacing: 8) {
                         Text("Monthly Summary")
                             .font(.headline)
-                        Text(AIAvailability.unavailableMessage)
+                        Text(AIAvailability.statusMessage)
                             .font(.caption)
                             .foregroundColor(.orange)
                             .multilineTextAlignment(.center)

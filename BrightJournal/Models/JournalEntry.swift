@@ -68,4 +68,13 @@ final class JournalEntry {
             self.moodScore = 0.0
         }
     }
+
+    // Sample entry for previews
+    static var sampleEntry: JournalEntry {
+        let entry = JournalEntry(rawText: "Today was challenging. I struggled with a difficult project at work and felt overwhelmed by the deadlines.")
+        entry.reframedText = "Today presented some challenges that helped me grow. I worked on a complex project that pushed my limits and reminded me of my resilience in facing demanding situations."
+        entry.moodTag = "neutral"
+        entry.moodScore = 0.2
+        return entry
+    }
 }

@@ -25,20 +25,29 @@ struct ReframePreviewView: View {
             VStack(spacing: 20) {
                 // Instructions
                 VStack(alignment: .leading, spacing: 12) {
-                    Text("Reframe Your Entry")
+                    Text("Manual Text Editing")
                         .font(.title2)
                         .fontWeight(.bold)
                     
-                    Text("1. Select the text below\n2. Tap ••• in the context menu\n3. Choose 'Rewrite' to reframe with positivity\n4. Tap 'Use as Reframed' when satisfied")
+                    Text("Edit your text manually or use Writing Tools by selecting text and tapping ••• in the context menu.")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                         .padding(.bottom, 8)
                     
-                    if !AIAvailability.isAvailable {
+                    if AIAvailability.isAvailable {
+                        HStack {
+                            Image(systemName: "sparkles")
+                                .foregroundColor(.blue)
+                            Text("Select text, then tap ••• for Writing Tools (Rewrite, Summarize, Proofread)")
+                                .font(.caption)
+                                .foregroundColor(.blue)
+                        }
+                        .padding(.vertical, 8)
+                    } else {
                         HStack {
                             Image(systemName: "exclamationmark.triangle")
                                 .foregroundColor(.orange)
-                            Text(AIAvailability.unavailableMessage)
+                            Text(AIAvailability.statusMessage)
                                 .font(.caption)
                                 .foregroundColor(.orange)
                         }
@@ -49,13 +58,13 @@ struct ReframePreviewView: View {
                 
                 // Editable text view with Writing Tools
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Text to reframe:")
+                    Text("Edit your text:")
                         .font(.headline)
                         .padding(.horizontal)
                     
                     WritingToolsTextView(
                         text: $workingText,
-                        placeholder: "No text to reframe"
+                        placeholder: "No text to edit"
                     )
                     .frame(minHeight: 300)
                     .padding()
@@ -79,13 +88,13 @@ struct ReframePreviewView: View {
                     .foregroundColor(.primary)
                     .cornerRadius(10)
                     
-                    Button("Use as Reframed") {
+                    Button("Use This Text") {
                         onSave(workingText)
                         dismiss()
                     }
                     .padding()
                     .frame(maxWidth: .infinity)
-                    .background(Color.green)
+                    .background(Color.blue)
                     .foregroundColor(.white)
                     .cornerRadius(10)
                     .disabled(workingText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
@@ -95,7 +104,7 @@ struct ReframePreviewView: View {
                 Spacer()
             }
             .padding(.vertical)
-            .navigationTitle("Reframe Entry")
+            .navigationTitle("Manual Edit")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -113,6 +122,6 @@ struct ReframePreviewView: View {
         originalText: "Today was really challenging and I made several mistakes at work. I'm feeling overwhelmed and everything seems to be going wrong.",
         currentReframedText: ""
     ) { newText in
-        print("Reframed text: \(newText)")
+        print("Edited text: \(newText)")
     }
 }

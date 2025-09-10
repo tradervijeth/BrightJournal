@@ -44,7 +44,7 @@ struct MonthlySummaryPreviewView: View {
                         HStack {
                             Image(systemName: "exclamationmark.triangle")
                                 .foregroundColor(.orange)
-                            Text(AIAvailability.unavailableMessage)
+                            Text(AIAvailability.statusMessage)
                                 .font(.caption)
                                 .foregroundColor(.orange)
                         }

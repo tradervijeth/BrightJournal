@@ -6,8 +6,28 @@
 	<dict>
 		<key>BrightJournal.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>C8D90E932E68C61C0092A7A2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C8D90EA52E68C61D0092A7A2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C8D90EAF2E68C61D0092A7A2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
